@@ -12,7 +12,9 @@ dependencies = [
     "uvicorn[standard]",
     "databases[aiosqlite,asyncpg]",
     "pyjwt",
-    "psycopg2-binary"
+    "psycopg2-binary",
+    "pydantic-settings",
+    "alembic"
 ]
 
 [tool.poetry.group.dev.dependencies]

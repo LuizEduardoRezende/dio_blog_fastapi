@@ -1,22 +1,8 @@
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-
-from contextlib import asynccontextmanager
-
 from src.controllers import post, auth
-from src.database import database, engine, metadata
 from src.exceptions import NotFoundPostError
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    from src.models.post import posts
-
-    await database.connect()
-    metadata.create_all(engine)
-    yield
-    await database.disconnect()
 
 
 tags_metadata = [
@@ -43,7 +29,6 @@ servers = [
 ]
 
 app = FastAPI(
-    lifespan=lifespan,
     title="DIO Blog API",
     description="""
 DIO blog API ajuda a você criar o seu blog pessoal.
