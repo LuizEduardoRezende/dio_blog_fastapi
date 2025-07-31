@@ -1,12 +1,12 @@
-from fastapi import status, APIRouter, Depends
+from fastapi import status, APIRouter, Depends, HTTPException
 from src.schemas.post import PostIn, PostUpdateIn
 from src.views.post import PostOut
 from src.services.post import PostService
 from src.security import login_required
+from src.exceptions import NotFoundPostError
 
-router = APIRouter(
-    prefix="/posts", dependencies=[Depends(login_required)], tags=["posts"]
-)
+
+router = APIRouter(prefix="/posts", dependencies=[Depends(login_required)])
 
 service = PostService()
 
@@ -37,5 +37,4 @@ async def update_post(post_id: int, post: PostUpdateIn):
 
 @router.delete("/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_post(post_id: int):
-    return await service.delete(post_id)
-    # No content response, so no return value needed
+    await service.delete(post_id)
