@@ -36,7 +36,10 @@ tags_metadata = [
 
 servers = [
     {"url": "http://localhost:8000", "description": "Ambiente de desenvolvimento"},
-    {"url": "https://api.example.com", "description": "Ambiente de produção"},
+    {
+        "url": "https://dio-blog-fastapi-45ev.onrender.com",
+        "description": "Ambiente de produção",
+    },
 ]
 
 app = FastAPI(
